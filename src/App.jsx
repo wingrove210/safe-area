@@ -10,7 +10,6 @@ function App() {
       
       // Основная настройка
       tg.expand();
-      tg.requestFullscreen.content_safe_area_changed();
       tg.setHeaderColor('bg_color');
       tg.setBackgroundColor('bg_color');
       
