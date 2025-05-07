@@ -7,9 +7,8 @@ function App() {
     
     if (tg) {
       tg.ready();
-      
-      // Основная настройка
       tg.expand();
+      tg.requestFullscreen();
       tg.setHeaderColor('bg_color');
       tg.setBackgroundColor('bg_color');
       
