@@ -7,10 +7,17 @@ function App() {
     
     if (tg) {
       tg.ready();
-      tg.expand(); // 1. Раскрываем на весь экран
-      tg.setHeaderColor('bg_color'); // 2. Важно именно 'bg_color'
-      tg.setBackgroundColor('bg_color'); // 3. Синхронизируем с фоном
-      tg.enableClosingConfirmation(); // 4. Опционально: подтверждение закрытия
+      
+      // Основная настройка
+      tg.expand();
+      tg.setHeaderColor('bg_color');
+      tg.setBackgroundColor('bg_color');
+      
+      // Дополнительные гарантии для Android
+      if (/Android/.test(navigator.userAgent)) {
+        document.documentElement.style.minHeight = '100%';
+        window.scrollTo(0, 0);
+      }
     }
   }, []);
 

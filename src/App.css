@@ -1,7 +1,3 @@
-body {
-  background-image: url(/src/assets/Three_Pallet.jpg);
-  background-size: cover;
-}
 .app-root {
   position: fixed;
   top: 0;
@@ -13,27 +9,28 @@ body {
     var(--tg-viewport-stable-inset-right, 0)
     var(--tg-viewport-stable-inset-bottom, 0)
     var(--tg-viewport-stable-inset-left, 0);
+  
+  background:url('../src/assets/Three_Pallet.jpg');
+  z-index: -1; /* Важно! */
   overflow: auto;
+}
+
+/* Перебиваем стили Telegram */
+.WebAppHeader {
+  display: none !important;
 }
 
 .content {
   padding: 20px;
   min-height: 100vh;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
+  position: relative; /* Для корректного z-index */
+  z-index: 1; /* Контент поверх фона */
+  color: white; /* Пример для контраста */
 }
 
 .bot-info {
-  background: var(--tg-theme-secondary-bg-color, #f4f4f5);
+  background: rgba(255,255,255,0.1);
   padding: 20px;
   border-radius: 16px;
-  text-align: center;
-}
-
-@supports (padding-bottom: env(safe-area-inset-bottom)) {
-  .app-root {
-    padding-bottom: env(safe-area-inset-bottom);
-  }
+  backdrop-filter: blur(10px);
 }
