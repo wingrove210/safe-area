@@ -1,40 +1,28 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import './App.css';
 
 function App() {
   useEffect(() => {
-    const initializeApp = () => {
-      const tg = window.Telegram?.WebApp;
-      
-      if (tg) {
-        tg.ready();
-        tg.expand();
-        tg.setHeaderColor('secondary_bg_color');
-        tg.setBackgroundColor('secondary_bg_color');
-        return true;
-      }
-      return false;
-    };
-
-    // Попытка инициализации при монтировании
-    if (!initializeApp()) {
-      // Перехват ошибки если SDK не загружен
-      console.error('Telegram Web App SDK not found!');
+    const tg = window.Telegram?.WebApp;
+    
+    if (tg) {
+      tg.ready();
+      tg.expand(); // 1. Раскрываем на весь экран
+      tg.setHeaderColor('bg_color'); // 2. Важно именно 'bg_color'
+      tg.setBackgroundColor('bg_color'); // 3. Синхронизируем с фоном
+      tg.enableClosingConfirmation(); // 4. Опционально: подтверждение закрытия
     }
   }, []);
 
   return (
-    <div className="app-container">
-      <header className="app-header">
-        <h1>My Telegram App</h1>
-      </header>
-      
-      <main className="content">
-        <div className="card">
-          <h2>Welcome!</h2>
-          <p>Telegram Web App initialized: {window.Telegram ? 'Yes' : 'No'}</p>
+    <div className="app-root">
+      <div className="content">
+        <h1>Indi.Community</h1>
+        <div className="bot-info">
+          <p>My Telegram App</p>
+          <p>@indi_communitybot</p>
         </div>
-      </main>
+      </div>
     </div>
   );
 }

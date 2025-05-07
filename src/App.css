@@ -1,62 +1,38 @@
-/* App.css */
-.app-container {
-  /* Безопасные отступы для всего приложения */
-  padding: 
-    var(--tg-content-safe-area-inset-top, 20px)
-    var(--tg-content-safe-area-inset-right, 16px)
-    var(--tg-content-safe-area-inset-bottom, 20px)
-    var(--tg-content-safe-area-inset-left, 16px);
-  
-  min-height: 100vh;
-  box-sizing: border-box;
-  background: var(--tg-theme-bg-color, #ffffff);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-}
-
-.app-header {
+/* Полное перекрытие фона */
+.app-root {
   position: fixed;
-  top: var(--tg-content-safe-area-inset-top, 20px);
+  top: 0;
   left: 0;
   right: 0;
-  padding: 0 16px;
+  bottom: 0;
+  padding: 
+    var(--tg-viewport-stable-inset-top, 0)
+    var(--tg-viewport-stable-inset-right, 0)
+    var(--tg-viewport-stable-inset-bottom, 0)
+    var(--tg-viewport-stable-inset-left, 0);
+  
   background: var(--tg-theme-bg-color, #ffffff);
-  z-index: 100;
+  overflow: auto;
 }
 
 .content {
-  margin-top: 60px; /* Высота хедера */
-  padding-bottom: 40px; /* Отступ для футера */
+  padding: 20px;
+  min-height: 100vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 }
 
-.card {
+.bot-info {
   background: var(--tg-theme-secondary-bg-color, #f4f4f5);
-  border-radius: 12px;
-  padding: 16px;
-  margin-bottom: 12px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 16px;
+  text-align: center;
 }
 
-.app-footer {
-  position: fixed;
-  bottom: var(--tg-content-safe-area-inset-bottom, 20px);
-  left: 0;
-  right: 0;
-  padding: 0 16px;
-  background: var(--tg-theme-bg-color, #ffffff);
-}
-
-.tg-button {
-  width: 100%;
-  padding: 12px;
-  background: var(--tg-theme-button-color, #2ea6ff);
-  color: var(--tg-theme-button-text-color, #ffffff);
-  border: none;
-  border-radius: 10px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: opacity 0.2s;
-}
-
-.tg-button:active {
-  opacity: 0.8;
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .app-root {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
 }
