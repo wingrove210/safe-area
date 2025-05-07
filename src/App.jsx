@@ -1,35 +1,42 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useEffect } from 'react';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  useEffect(() => {
+    const initializeApp = () => {
+      const tg = window.Telegram?.WebApp;
+      
+      if (tg) {
+        tg.ready();
+        tg.expand();
+        tg.setHeaderColor('secondary_bg_color');
+        tg.setBackgroundColor('secondary_bg_color');
+        return true;
+      }
+      return false;
+    };
+
+    // Попытка инициализации при монтировании
+    if (!initializeApp()) {
+      // Перехват ошибки если SDK не загружен
+      console.error('Telegram Web App SDK not found!');
+    }
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="app-container">
+      <header className="app-header">
+        <h1>My Telegram App</h1>
+      </header>
+      
+      <main className="content">
+        <div className="card">
+          <h2>Welcome!</h2>
+          <p>Telegram Web App initialized: {window.Telegram ? 'Yes' : 'No'}</p>
+        </div>
+      </main>
+    </div>
+  );
 }
 
-export default App
+export default App;
