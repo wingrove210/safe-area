@@ -1,35 +1,42 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useEffect } from 'react';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  // Инициализация Telegram Web App
+  useEffect(() => {
+    if (window.Telegram?.WebApp) {
+      Telegram.WebApp.ready();
+      Telegram.WebApp.expand();
+      Telegram.WebApp.setHeaderColor('secondary_bg_color');
+      Telegram.WebApp.setBackgroundColor('secondary_bg_color');
+    }
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="app-container">
+      {/* Хедер с безопасным отступом сверху */}
+      <header className="app-header">
+        <h1>My Telegram App</h1>
+      </header>
+
+      {/* Основной контент с отступами */}
+      <main className="content">
+        <div className="card">
+          <h2>Card Title</h2>
+          <p>This is example content</p>
+        </div>
+        <div className="card">
+          <h2>Another Card</h2>
+          <p>More example text</p>
+        </div>
+      </main>
+
+      {/* Футер с безопасным отступом снизу */}
+      <footer className="app-footer">
+        <button className="tg-button">Action</button>
+      </footer>
+    </div>
+  );
 }
 
-export default App
+export default App;
